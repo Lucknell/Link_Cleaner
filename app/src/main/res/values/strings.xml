@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Link Cleaner</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="browser_header">Default Browser settings</string>
+    <string name="custom_filter_header">Custom Filters</string>
+    <string name="settings_header">Settings</string>
+    <string name="back_button_title">Are you sure?</string>
+    <string name="back_button_message">You appeared to have made changes but did not save them.
+        Discard these changes?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="CustomFiltersMessages">Enter Your Custom filters here.
+        \nWhat to match,what to split, what index to take</string>
+    <string name="browser_title">Default browser to use</string>
+    <string name="filterButton">filterButton</string>
+    <string name="tutButton">tutorialButton</string>
+</resources>

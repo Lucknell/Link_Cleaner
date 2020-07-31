@@ -1,0 +1,40 @@
+<!--
+  ~ Copyright 2018 The app Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/browser_header">
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="enableBrowser"
+            android:title="Use a default browser" />
+        <ListPreference
+            app:key="browsers"
+            app:title="@string/browser_title"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+    <Preference
+        android:title="Tap for Custom Filters"
+        android:key="@string/filterButton"
+        android:summary="Custom Filters"/>
+    <Preference
+        android:title="See Startup Tutorial"
+        android:key="@string/tutButton"
+        android:summary="Tutorial Screen"/>
+
+</PreferenceScreen>
