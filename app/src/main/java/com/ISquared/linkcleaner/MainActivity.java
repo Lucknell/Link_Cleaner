@@ -6,17 +6,22 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
+import static com.ISquared.linkcleaner.Constants.ACTIVITY;
+import static com.ISquared.linkcleaner.Constants.FILTER;
+import static com.ISquared.linkcleaner.Constants.THEME;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        String activityPref = prefs.getString("activity", null);
-        String filters = prefs.getString("filters", "invalid");
+        String activityPref = prefs.getString(ACTIVITY, null);
+        String filters = prefs.getString(FILTER, Constants.FILTERS);
         Uri startIntentData;
+        Theme theme = new Theme();
+        int themeValue = theme.returnTheme(prefs.getInt(THEME, 0), getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK);
+        setTheme(themeValue);
         if ("text/plain".equals(getIntent().getType())) {
 
             String sharedText = getIntent().getStringExtra(Intent.EXTRA_TEXT);
@@ -46,92 +53,6 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, Url);
             Url = decodeHTML(Url);
             Log.d(TAG, Url);
-            /*if (Url.contains("PARM1=")) {
-                Url = Url.split("PARM1=")[1];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("url=")) {
-                Url = Url.split("url=")[1];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("clicks.slickdeals.net/i.php?u1=http")) {
-                Url = Url.split("u2=")[1];
-                Log.d(TAG, Url);
-            }
-            if (startIntentData.toString().contains("1225267-11965372?")) {
-                Url = "https://staples.com" + Url;
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("?gclid")) {
-                Url = Url.split("&url=")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("link=")) {
-                Url = Url.split("link=")[1];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("u=")) {//brickseek
-                if (Uri.parse(Url.split("u=")[1]).getHost() != null)
-                    Url = Url.split("u=")[1];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("h=")) {
-                Url = Url.split("h=")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("utm_")) {
-                Url = Url.split("utm_")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("&nm_"))// newegg
-            {
-                Url = Url.split("&nm_")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("amp/s"))//amp pages
-            {
-                Url = Url.split("amp/s/")[1];
-                Url = Url.replace("amp/", "");
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("bhphotovideo.com")) {
-                Url = Url.split(".html/")[0] + ".html/";
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("ref=")) {
-                Url = Url.split("ref=")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("u1=")) {
-                Url = Url.split("u1=")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("mpre=")) {
-                Url = Url.split("ref=")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("&a=")) {
-                Url = Url.split("&a=")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("q=")) {
-                Url = Url.split("q=")[1];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("token=")) {
-                Url = Url.split("token=")[0];
-                Log.d(TAG, Url);
-            }
-            Url = decodeHTML(Url);
-            Log.d(TAG, Url);
-            if (Url.contains("src=")) {
-                Url = Url.split("src=")[0];
-                Log.d(TAG, Url);
-            }
-            if (Url.contains("&sa=D&")) {
-                Url = Url.split("&sa=D&")[0];
-                Log.d(TAG, Url);
-            }*/
             Url = decodeHTML(Url);
             if (!filters.equals("invalid")) {
                 Scanner scanner = new Scanner(filters);
@@ -144,14 +65,13 @@ public class MainActivity extends AppCompatActivity {
                                 if (Uri.parse(Url.split(Pattern.quote(customFilters[2]))[index]).getHost() != null)
                                     Url = Url.split(Pattern.quote(customFilters[2]))[index];
                             } catch (ArrayIndexOutOfBoundsException ignored) {
-
                             }
                             Log.d(TAG, Url);
                         }
                     } else if (customFilters[0].equalsIgnoreCase("replace")) {
                         if (Url.contains(customFilters[1])) {
                             String replace;
-                            if (customFilters.length ==3)
+                            if (customFilters.length == 3)
                                 replace = "";
                             else
                                 replace = customFilters[3];
@@ -162,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     } else if (customFilters[0].equalsIgnoreCase("prepend")) {
                         if (Url.contains(customFilters[1])) {
-                            if (Uri.parse(customFilters[2]+Url).getHost() != null)
+                            if (Uri.parse(customFilters[2] + Url).getHost() != null)
                                 Url = customFilters[2] + Url;
                             Log.d(TAG, Url);
                         }
@@ -200,13 +120,10 @@ public class MainActivity extends AppCompatActivity {
         boolean found = true;
 
         try {
-
             packageManager.getPackageInfo(packageName, 0);
         } catch (PackageManager.NameNotFoundException e) {
-
             found = false;
         }
-
         return found;
     }
 
@@ -228,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < resolveInfos.size(); i++) {
             activityInfo[i] = resolveInfos.get(i).activityInfo;
         }
-
         if (resolveInfos.isEmpty())
             return null;
         else

@@ -20,21 +20,31 @@
     <PreferenceCategory app:title="@string/browser_header">
 
         <SwitchPreference
+
             android:defaultValue="false"
             android:key="enableBrowser"
             android:title="Use a default browser" />
         <ListPreference
-            app:key="browsers"
-            app:title="@string/browser_title"
+            android:key="browsers"
+            android:title="@string/browser_title"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
     <Preference
         android:title="Tap for Custom Filters"
         android:key="@string/filterButton"
-        android:summary="Custom Filters"/>
+        android:summary="Custom Filters" />
     <Preference
         android:title="See Startup Tutorial"
         android:key="@string/tutButton"
-        android:summary="Tutorial Screen"/>
-
+        android:summary="Tutorial Screen" />
+    <ListPreference
+        android:defaultValue="Dark"
+        android:entries="@array/themes"
+        android:entryValues="@array/themes"
+        android:key="@string/themeButton"
+        android:title="Select Theme" />
+    <Preference
+        android:key="@string/aboutButton"
+        android:summary="Tutorial Screen"
+        android:title="About LinkCleaner" />
 </PreferenceScreen>

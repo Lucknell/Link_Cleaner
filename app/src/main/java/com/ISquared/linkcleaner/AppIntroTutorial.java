@@ -1,24 +1,27 @@
 package com.ISquared.linkcleaner;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
+
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
 import com.github.paolorotolo.appintro.model.SliderPage;
+
+import static com.ISquared.linkcleaner.Constants.INTRO;
 
 public class AppIntroTutorial extends AppIntro {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setTheme(R.style.darkMode);
         super.onCreate(savedInstanceState);
+
         // Instead of fragments, you can also use our default slide.
         // Just create a `SliderPage` and provide title, description, background and image.
         // AppIntro will do the rest.
@@ -50,7 +53,7 @@ public class AppIntroTutorial extends AppIntro {
         sliderPage.setImageDrawable(R.drawable.customfilters);
         addSlide(AppIntroFragment.newInstance(sliderPage));
         sliderPage.setTitle("Filter types");
-        sliderPage.setDescription("\nSplit\nReplace\nAppend\nPrepend\n" +
+        sliderPage.setDescription("This portion is for advance users.\n\nSplit\nReplace\nAppend\nPrepend\n" +
                 "These 4 filters types are what help LinkCleaner remove references. All filters are " +
                 "comma delimited.");
         sliderPage.setImageDrawable(0);
@@ -60,32 +63,32 @@ public class AppIntroTutorial extends AppIntro {
                 "want to match, then the part of the link you want to separate into a list, and then what number minus one to " +
                 "choose from the list.\nex. Match url=, separate the list at url=," +
                 " equals then take the second item on the list\nSplit,url=,url=,1");
+        sliderPage.setImageDrawable(R.drawable.split);
         addSlide(AppIntroFragment.newInstance(sliderPage));
         sliderPage.setTitle("Replace");
         sliderPage.setDescription("To use Replace start a new line with Replace, then the part of " +
-                "the link you want to match, then part of the url you want to replace, and finally" +
+                "the link you want to match, then part of the url you want to replace, and finally " +
                 "the part that will take the place of what you wanted to replace.\nex. Match www, " +
                 "replace www, with https://www\nReplace,www,www,https://wwww");
+        sliderPage.setImageDrawable(R.drawable.replace);
         addSlide(AppIntroFragment.newInstance(sliderPage));
         sliderPage.setTitle("Append");
         sliderPage.setDescription("To Use Append start a new line with Append, then the part of the " +
                 "link you want to match, then whatever you would like to add to the end of the link" +
                 "\nex. Match mytestsite.com/index, append .html/\nAppend,mytestsite.com/index,.html");
+        sliderPage.setImageDrawable(R.drawable.append);
         addSlide(AppIntroFragment.newInstance(sliderPage));
         sliderPage.setTitle("Prepend");
         sliderPage.setDescription("To Use Prepend start a new line with Prepend, then the part of the " +
-        "link you want to match, then whatever you would like to add to the beginning of the link" +
+                "link you want to match, then whatever you would like to add to the beginning of the link" +
                 "\nex. Match mytestsite.com/index.html, prepend https://\nPrepend,mytestsite.com/index.html,https://");
+        sliderPage.setImageDrawable(R.drawable.prepend);
         addSlide(AppIntroFragment.newInstance(sliderPage));
         sliderPage.setTitle("All set!");
+        sliderPage.setImageDrawable(0);
         sliderPage.setDescription("Go get em!");
         setProgressButtonEnabled(true);
         addSlide(AppIntroFragment.newInstance(sliderPage));
-
-
-
-        // OPTIONAL METHODS
-        // Override bar/separator color.
         setBarColor(Color.parseColor("#3F51B5"));
         setSeparatorColor(Color.parseColor("#2196F3"));
     }
@@ -93,26 +96,20 @@ public class AppIntroTutorial extends AppIntro {
     @Override
     public void onSkipPressed(Fragment currentFragment) {
         super.onSkipPressed(currentFragment);
-        Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
         startActivity(intent);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        pref.edit().putBoolean("IntroTutSeen",true).apply();
+        pref.edit().putBoolean(INTRO, true).apply();
         finish();
     }
 
     @Override
     public void onDonePressed(Fragment currentFragment) {
         super.onDonePressed(currentFragment);
-        Intent intent = new Intent(getApplicationContext(),SettingsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
         startActivity(intent);
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        pref.edit().putBoolean("IntroTutSeen",true).apply();
+        pref.edit().putBoolean(INTRO, true).apply();
         finish();
-    }
-
-    @Override
-    public void onSlideChanged(@Nullable Fragment oldFragment, @Nullable Fragment newFragment) {
-        super.onSlideChanged(oldFragment, newFragment);
-        // Do something when the slide changes.
     }
 }

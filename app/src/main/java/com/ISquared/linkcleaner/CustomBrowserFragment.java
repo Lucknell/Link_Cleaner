@@ -11,15 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CustomBrowserFragment extends AppCompatDialogFragment  implements AppAdapter.OnAppSelectedListener{
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+
+public class CustomBrowserFragment extends AppCompatDialogFragment implements AppAdapter.OnAppSelectedListener {
 
 
     private static final String ARGUMENT_KEY_APPS = "apps";
@@ -43,14 +43,14 @@ public class CustomBrowserFragment extends AppCompatDialogFragment  implements A
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ContextThemeWrapper wrapper = new ContextThemeWrapper(getContext(),
                 android.R.style.Theme_Material_Light);
-        final View view = LayoutInflater.from(wrapper).inflate(R.layout.custom_browser,null);
+        final View view = LayoutInflater.from(wrapper).inflate(R.layout.custom_browser, null);
         final Dialog dialog = new CustomWidthBottomSheetDialog(wrapper);
         dialog.setContentView(view);
         RecyclerView appList = view.findViewById(R.id.apps);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         appList.setLayoutManager(layoutManager);
         AppAdapter adapter = new AppAdapter(wrapper,
-                (ActivityInfo[])getArguments().getParcelableArray(ARGUMENT_KEY_APPS),
+                (ActivityInfo[]) getArguments().getParcelableArray(ARGUMENT_KEY_APPS),
                 (ActivityInfo) getArguments().getParcelable(ARGUMENT_STORE));
         adapter.setOnAppSelectedListener(this);
         appList.setAdapter(adapter);
@@ -58,35 +58,33 @@ public class CustomBrowserFragment extends AppCompatDialogFragment  implements A
         return dialog;
     }
 
+    static class CustomWidthBottomSheetDialog extends BottomSheetDialog {
 
+        CustomWidthBottomSheetDialog(@NonNull Context context) {
+            super(context);
+        }
 
-static class CustomWidthBottomSheetDialog extends BottomSheetDialog {
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+        }
 
-    CustomWidthBottomSheetDialog(@NonNull Context context) {
-        super(context);
+        @Override
+        public void setContentView(View contentView) {
+            super.setContentView(contentView);
+
+        }
+
+        @Override
+        public void setContentView(@LayoutRes int layoutResId) {
+            throw new IllegalStateException("CustomWidthBottomSheetDialog only supports setContentView(View)");
+        }
+
+        @Override
+        public void setContentView(View view, ViewGroup.LayoutParams params) {
+            throw new IllegalStateException("CustomWidthBottomSheetDialog only supports setContentView(View)");
+        }
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    public void setContentView(View contentView) {
-        super.setContentView(contentView);
-
-    }
-
-    @Override
-    public void setContentView(@LayoutRes int layoutResId) {
-        throw new IllegalStateException("CustomWidthBottomSheetDialog only supports setContentView(View)");
-    }
-
-    @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-        throw new IllegalStateException("CustomWidthBottomSheetDialog only supports setContentView(View)");
-    }
-}
 
     @Override
     public void onAppSelected(AppAdapter.App app) {

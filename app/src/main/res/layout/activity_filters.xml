@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,7 +21,8 @@
         android:gravity="start|top"
         android:hint="@string/CustomFiltersMessages"
         android:inputType="textMultiLine"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/saveButton"
@@ -32,7 +32,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="58dp"
         android:layout_marginStart="32dp"
-        android:text="Save" />
+        android:text="@string/save"
+        android:textColor="@color/textColor" />
 
     <Button
         android:id="@+id/discardButton"
@@ -44,5 +45,7 @@
         android:layout_marginBottom="58dp"
         android:layout_marginEnd="32dp"
         android:layout_marginTop="0dp"
-        android:text="Restore Default" />
+        android:text="@string/restore_default"
+        android:textColor="@color/textColor"
+        tools:ignore="RelativeOverlap" />
 </RelativeLayout>

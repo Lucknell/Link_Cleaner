@@ -16,4 +16,16 @@
     <string name="browser_title">Default browser to use</string>
     <string name="filterButton">filterButton</string>
     <string name="tutButton">tutorialButton</string>
+    <string name="aboutButton">aboutButton</string>
+    <string name="themeButton">Themes</string>
+    <string name="save">Save</string>
+    <string name="restore_default">Restore Default</string>
+    <string name="open_in">Open in</string>
+    <string name="go_to_filters">Go to Filters</string>
+    <string name="theme_summary">Current Theme is\u0020</string>
+    <string name="Dark">Dark</string>
+    <string name="Light">Light</string>
+    <string name="Amoled">Amoled Black</string>
+    <string name="System">Follow System</string>
+
 </resources>

@@ -1,11 +1,64 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/altColorPrimary</item>
+        <item name="colorPrimaryDark">@color/altColorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/backgroundColor</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorPrimary">@color/textColor</item>
+        <item name="android:textColorSecondary">@color/textSecondaryColor</item>
+        <item name="android:editTextColor">@color/textColor</item>
+        <item name="titleTextColor">@color/textColor</item>
+        <item name="subtitleTextColor">@color/textColor</item>
+        <item name="textColorAlertDialogListItem">@color/textColor</item>
+        <item name="actionBarTheme">@style/ActionbarThemeLight</item>
+    </style>
+
+    <style name="darkMode" parent="Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/darkBackgroundColor</item>
+        <item name="android:textColor">@color/darkTextColor</item>
+        <item name="android:textColorPrimary">@color/darkTextColor</item>
+        <item name="android:textColorSecondary">@color/darkTextSecondaryColor</item>
+        <item name="android:editTextColor">@color/darkTextColor</item>
+        <item name="titleTextColor">@color/darkTextColor</item>
+        <item name="subtitleTextColor">@color/darkTextColor</item>
+        <item name="textColorAlertDialogListItem">@color/darkTextColor</item>
+        <item name="actionBarTheme">@style/ActionbarThemeDark</item>
+    </style>
+
+    <style name="amoledBlack" parent="Theme.AppCompat.DayNight">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:background">@color/textColor</item>
+        <item name="android:textColor">@color/darkTextColor</item>
+        <item name="android:textColorPrimary">@color/darkTextColor</item>
+        <item name="android:textColorSecondary">@color/darkTextSecondaryColor</item>
+        <item name="android:editTextColor">@color/darkTextColor</item>
+        <item name="titleTextColor">@color/darkTextColor</item>
+        <item name="subtitleTextColor">@color/darkTextColor</item>
+        <item name="textColorAlertDialogListItem">@color/darkTextColor</item>
+        <item name="actionBarTheme">@style/ActionbarThemeDark</item>
+    </style>
+
+    <style name="AppTut" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ActionbarThemeLight" parent="Theme.AppCompat.DayNight">
+        <item name="android:background">@color/altColorPrimary</item>
+    </style>
+
+    <style name="ActionbarThemeDark" parent="Theme.AppCompat.DayNight">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
 </resources>

@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ISquared.linkcleaner"
-    android:versionCode="2">
+    package="com.ISquared.linkcleaner">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".AppIntroTutorial"></activity>
+        android:theme="@style/darkMode"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".AppIntroTutorial" />
         <activity
             android:name=".Filters"
             android:windowSoftInputMode="adjustResize" />
@@ -63,7 +62,7 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Credits" />
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
